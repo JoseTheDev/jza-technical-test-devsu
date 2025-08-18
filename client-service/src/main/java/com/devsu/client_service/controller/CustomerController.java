@@ -18,6 +18,8 @@ import com.devsu.client_service.model.dto.CustomerManageResponseDTO;
 import com.devsu.client_service.model.dto.CustomerSearchResponseDTO;
 import com.devsu.client_service.model.dto.CustomerUpdateRequestDTO;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
@@ -29,21 +31,24 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
+@Tag(name = "Clientes API", description = "Operaciones sobre clientes")
 public class CustomerController {
 
 	private final CustomerCommand customerCommand;
 
 	@GetMapping("/{customerId}")
+	@Operation(summary = "Obtener un cliente por ID")
 	public ResponseEntity<CustomerSearchResponseDTO> searchCustomer(
 			@PathVariable @NotNull(message = "ID DE CLIENTE REQUERIDO") Long customerId) {
 
-		log.info("Fetching customer with id: {}", customerId);
+		log.info("Fetching customer with ID: {}", customerId);
 
 		CustomerSearchResponseDTO customer = customerCommand.searchCustomer(customerId);
 		return ResponseEntity.ok(customer);
 	}
 
 	@PostMapping
+	@Operation(summary = "Crear un cliente")
 	public ResponseEntity<CustomerManageResponseDTO> createCustomer(
 			@RequestBody @Valid CustomerCreateRequestDTO requestDTO) {
 
@@ -54,6 +59,7 @@ public class CustomerController {
 	}
 
 	@PutMapping("/{customerId}")
+	@Operation(summary = "Actualizar un cliente")
 	public ResponseEntity<CustomerManageResponseDTO> updateCustomer(
 		    @RequestBody @Valid CustomerUpdateRequestDTO requestDTO,
 			@PathVariable @NotNull(message = "ID DE CLIENTE REQUERIDO") Long customerId) {
@@ -65,6 +71,7 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/{customerId}")
+	@Operation(summary = "Eliminar un cliente")
 	public ResponseEntity<CustomerManageResponseDTO> deleteCustomer(
 			@PathVariable @NotNull(message = "ID DE CLIENTE REQUERIDO") Long customerId) {
 

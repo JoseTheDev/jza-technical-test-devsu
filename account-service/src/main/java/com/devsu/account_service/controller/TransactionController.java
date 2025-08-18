@@ -17,6 +17,8 @@ import com.devsu.account_service.model.dto.transaction.TransactionSearchResponse
 import com.devsu.account_service.model.dto.transaction.TransactionUpdateRequestDTO;
 import com.devsu.account_service.service.transaction.TransactionService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +29,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
+@Tag(name = "Movimientos API", description = "Operaciones sobre movimientos")
 public class TransactionController {
 
     private final TransactionService transactionService;
 
     @GetMapping("/{transactionId}")
+	@Operation(summary = "Obtener un movimiento por ID")
 	public ResponseEntity<TransactionSearchResponseDTO> searchTransaction(
 			@PathVariable @NotNull(message = "ID DE TRANSACCION REQUERIDO") Long transactionId) {
 
@@ -42,6 +46,7 @@ public class TransactionController {
 	}
 
 	@PostMapping
+	@Operation(summary = "Crear un movimiento")
 	public ResponseEntity<TransactionManageResponseDTO> createTransaction(
 			@RequestBody @Valid TransactionCreateRequestDTO requestDTO) {
 
@@ -52,6 +57,7 @@ public class TransactionController {
 	}
 
 	@PutMapping("/{transactionId}")
+	@Operation(summary = "Actualizar un movimiento")
 	public ResponseEntity<TransactionManageResponseDTO> updateTransaction(
 		    @RequestBody @Valid TransactionUpdateRequestDTO requestDTO,
 			@PathVariable @NotNull(message = "ID DE TRANSACCION REQUERIDO") Long transactionId) {
