@@ -4,8 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -23,23 +21,23 @@ import lombok.NoArgsConstructor;
 public class Person {
 
     @Id
-    @Column(name = "identificacion", length = 20)
+    @Column(name = "identificacion")
     private String identification;
 
-    @Column(name = "nombre", nullable = false, length = 100)
+    @Column(name = "nombre")
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "genero", nullable = false, length = 1)
+    @Column(name = "genero")
     private String gender;
 
     @Column(name = "edad")
     private Integer age;
 
-    @Column(name = "direccion", length = 100)
+    @Column(name = "direccion")
     private String address;
 
-    @Column(name = "telefono", length = 20)
+    @Column(name = "telefono")
     private String phoneNumber;
 
 }

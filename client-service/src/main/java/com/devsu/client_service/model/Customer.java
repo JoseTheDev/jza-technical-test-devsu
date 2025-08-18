@@ -19,13 +19,13 @@ import lombok.NoArgsConstructor;
 public class Customer extends Person {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente", unique = true, nullable = false)
+    @Column(name = "id_cliente")
     private Long customerId;
 
-    @Column(nullable = false)
+    @Column(name = "contrasena")
     private String password;
 
-    @Column(nullable = false)
+    @Column(name = "estado")
     private Boolean status = true;
 
 }
