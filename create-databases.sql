@@ -1,5 +1,5 @@
-CREATE DATABASE clientes_db;
-CREATE DATABASE cuentas_db;
+CREATE DATABASE IF NOT EXISTS clientes_db;
+CREATE DATABASE IF NOT EXISTS cuentas_db;
 
 -- SERVICIOS DE CLIENTE
 USE clientes_db;

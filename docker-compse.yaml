@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+      image: mysql:8.0
+      container_name: mysql-all
+      environment:
+        MYSQL_ROOT_PASSWORD: testpassword
+      ports:
+        - "3306:3306"
+      volumes:
+        - mysql-data:/var/lib/mysql
+        - ./BaseDatos.sql:/docker-entrypoint-initdb.d/BaseDatos.sql:ro
+
+  client-service:
+    image: jzerna/client-service:latest
+    container_name: client-service
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/clientes_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: testpassword
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+    depends_on:
+      - mysql
+
+  account-service:
+    image: jzerna/account-service:latest
+    container_name: account-service
+    ports:
+      - "8082:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/cuentas_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: testpassword
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate
+    depends_on:
+      - mysql
+
+volumes:
+  mysql-data:
