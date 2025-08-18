@@ -30,12 +30,13 @@ public interface CustomerService {
     /**
      * Updates an existing customer.
      *
+     * @param customerId Customer ID
      * @param customerDTO Customer DTO containing updated information
      * @return a {@code CustomerManageResponseDTO} containing update status and message
      * @throws ValidationException if provided customer data is invalid
      * @throws CustomerNotFoundException if customer with given ID does not exist
      */
-    CustomerManageResponseDTO updateCustomer(CustomerUpdateRequestDTO customerDTO);
+    CustomerManageResponseDTO updateCustomer(Long customerId, CustomerUpdateRequestDTO customerDTO);
 
     /**
      * Deletes a customer.

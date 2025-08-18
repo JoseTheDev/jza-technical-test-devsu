@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerManageResponseDTO updateCustomer(CustomerUpdateRequestDTO customerDTO) {
+    public CustomerManageResponseDTO updateCustomer(Long customerId, CustomerUpdateRequestDTO customerDTO) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'updateCustomer'");
     }

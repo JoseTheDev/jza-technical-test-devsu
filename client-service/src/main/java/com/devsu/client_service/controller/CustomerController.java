@@ -33,7 +33,7 @@ public class CustomerController {
 
 	private final CustomerService customerService;
 
-	@GetMapping("/{id}")
+	@GetMapping("/{customerId}")
 	public ResponseEntity<CustomerSearchResponseDTO> searchCustomer(
 			@PathVariable @NotNull(message = "ID DE CLIENTE REQUERIDO") Long customerId) {
 
@@ -53,22 +53,22 @@ public class CustomerController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(customer);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/{customerId}")
 	public ResponseEntity<CustomerManageResponseDTO> updateCustomer(
 		    @RequestBody @Valid CustomerUpdateRequestDTO requestDTO,
 			@PathVariable @NotNull(message = "ID DE CLIENTE REQUERIDO") Long customerId) {
 
-		log.info("Updating customer with id: {}", customerId);
+		log.info("Updating customer with ID: {}", customerId);
 
-		CustomerManageResponseDTO customer = customerService.updateCustomer(requestDTO);
+		CustomerManageResponseDTO customer = customerService.updateCustomer(customerId, requestDTO);
 		return ResponseEntity.ok(customer);
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{customerId}")
 	public ResponseEntity<CustomerManageResponseDTO> deleteCustomer(
 			@PathVariable @NotNull(message = "ID DE CLIENTE REQUERIDO") Long customerId) {
 
-		log.info("Deleting customer with id: {}", customerId);
+		log.info("Deleting customer with ID: {}", customerId);
 
 		CustomerManageResponseDTO customer = customerService.deleteCustomer(customerId);
 		return ResponseEntity.ok(customer);

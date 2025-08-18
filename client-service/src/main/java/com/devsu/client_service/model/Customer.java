@@ -1,17 +1,31 @@
 package com.devsu.client_service.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "clientes")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Customer extends Person {
 
-    // TODO: PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente", unique = true, nullable = false)
     private Long customerId;
 
+    @Column(nullable = false)
     private String password;
 
-    private Boolean status;
+    @Column(nullable = false)
+    private Boolean status = true;
 
 }
