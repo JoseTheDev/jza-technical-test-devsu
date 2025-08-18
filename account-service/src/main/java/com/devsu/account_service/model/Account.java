@@ -19,7 +19,7 @@ public class Account {
 
     @Id
     @Column(name = "numero_cuenta")
-    private Integer accountNumber;
+    private Long accountNumber;
 
     @Column(name = "tipo_cuenta")
     private String accountType;
