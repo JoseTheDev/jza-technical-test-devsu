@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class PersonDTO {
 
-    private Long id;
+    private String identification;
 
     private String name;
 
@@ -17,8 +17,6 @@ public class PersonDTO {
     private Gender gender;
 
     private Integer age;
-
-    private String identification;
 
     private String address;
 

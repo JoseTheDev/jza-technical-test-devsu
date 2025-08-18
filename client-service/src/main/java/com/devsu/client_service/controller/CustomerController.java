@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devsu.client_service.command.CustomerCommand;
 import com.devsu.client_service.model.dto.CustomerCreateRequestDTO;
 import com.devsu.client_service.model.dto.CustomerManageResponseDTO;
 import com.devsu.client_service.model.dto.CustomerSearchResponseDTO;
 import com.devsu.client_service.model.dto.CustomerUpdateRequestDTO;
-import com.devsu.client_service.service.CustomerService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomerController {
 
-	private final CustomerService customerService;
+	private final CustomerCommand customerCommand;
 
 	@GetMapping("/{customerId}")
 	public ResponseEntity<CustomerSearchResponseDTO> searchCustomer(
@@ -39,7 +39,7 @@ public class CustomerController {
 
 		log.info("Fetching customer with id: {}", customerId);
 
-		CustomerSearchResponseDTO customer = customerService.searchCustomer(customerId);
+		CustomerSearchResponseDTO customer = customerCommand.searchCustomer(customerId);
 		return ResponseEntity.ok(customer);
 	}
 
@@ -49,7 +49,7 @@ public class CustomerController {
 
 		log.info("Creating customer");
 
-		CustomerManageResponseDTO customer = customerService.createCustomer(requestDTO);
+		CustomerManageResponseDTO customer = customerCommand.createCustomer(requestDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(customer);
 	}
 
@@ -60,7 +60,7 @@ public class CustomerController {
 
 		log.info("Updating customer with ID: {}", customerId);
 
-		CustomerManageResponseDTO customer = customerService.updateCustomer(customerId, requestDTO);
+		CustomerManageResponseDTO customer = customerCommand.updateCustomer(customerId, requestDTO);
 		return ResponseEntity.ok(customer);
 	}
 
@@ -70,7 +70,7 @@ public class CustomerController {
 
 		log.info("Deleting customer with ID: {}", customerId);
 
-		CustomerManageResponseDTO customer = customerService.deleteCustomer(customerId);
+		CustomerManageResponseDTO customer = customerCommand.deleteCustomer(customerId);
 		return ResponseEntity.ok(customer);
 	}
 

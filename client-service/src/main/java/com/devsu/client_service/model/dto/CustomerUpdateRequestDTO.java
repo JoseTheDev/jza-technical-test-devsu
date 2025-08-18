@@ -26,4 +26,6 @@ public class CustomerUpdateRequestDTO {
 
     private Boolean status;
 
+    private String password;
+
 }

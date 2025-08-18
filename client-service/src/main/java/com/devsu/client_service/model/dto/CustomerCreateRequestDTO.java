@@ -7,7 +7,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import lombok.Data;
 
+@Data
 public class CustomerCreateRequestDTO {
 
     @NotBlank(message = "DEBE SUMINISTRAR EL NOMBRE")
@@ -29,5 +31,8 @@ public class CustomerCreateRequestDTO {
 
     @NotBlank(message = "DEBE SUMINISTRAR UN NUMERO DE TELEFONO")
     private String phoneNumber;
+
+    @NotBlank(message = "DEBE SUMINISTRAR UNA CONTRASEÑA")
+    private String password;
 
 }
