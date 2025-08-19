@@ -1,4 +1,4 @@
 FROM eclipse-temurin:21-jdk-alpine
 VOLUME /tmp
-COPY target/account-service.jar app.jar
+COPY target/account-service-1.0.0.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
