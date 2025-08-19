@@ -1,5 +1,7 @@
 package com.devsu.client_service.model;
 
+import com.devsu.client_service.enums.Gender;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,7 +31,7 @@ public class Person {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "genero")
-    private String gender;
+    private Gender gender;
 
     @Column(name = "edad")
     private Integer age;

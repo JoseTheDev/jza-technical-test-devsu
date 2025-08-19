@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional
     public Customer createCustomer(Customer customer) {
-        return customerRepository.findByIdenfication(customer.getIdentification())
+        return customerRepository.findByIdentification(customer.getIdentification())
                 .orElseGet(() -> customerRepository.save(customer));
     }
 
