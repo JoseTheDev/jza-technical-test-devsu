@@ -46,6 +46,17 @@ public class CustomerController {
 		CustomerSearchResponseDTO customer = customerCommand.searchCustomer(customerId);
 		return ResponseEntity.ok(customer);
 	}
+	
+	@GetMapping("/{customerName}")
+	@Operation(summary = "Obtener un cliente por nombre")
+	public ResponseEntity<CustomerSearchResponseDTO> searchCustomerByName(
+			@PathVariable @NotNull(message = "NOMBRE DEL CLIENTE REQUERIDO") String customerName) {
+
+		log.info("Fetching customer with name: {}", customerName);
+
+		CustomerSearchResponseDTO customer = customerCommand.searchCustomerByName(customerName);
+		return ResponseEntity.ok(customer);
+	}
 
 	@PostMapping
 	@Operation(summary = "Crear un cliente")

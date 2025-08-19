@@ -15,6 +15,8 @@ public interface CustomerService {
      */
     Customer searchCustomer(Long customerId);
 
+    Customer searchCustomerByName(String name);
+
     /**
      * Creates a new customer.
      *

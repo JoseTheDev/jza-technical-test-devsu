@@ -30,6 +30,9 @@ public class Account {
     @Column(name = "id_cliente")
     private Long customerId;
 
+    @Column(name = "nombre_cliente")
+    private String customerName;
+
     @Column(name = "estado")
     private Boolean status = true;
 

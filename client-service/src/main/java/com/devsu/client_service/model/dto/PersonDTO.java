@@ -11,6 +11,8 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PersonDTO {
 
+    private Long id;
+
     private String identification;
 
     private String name;

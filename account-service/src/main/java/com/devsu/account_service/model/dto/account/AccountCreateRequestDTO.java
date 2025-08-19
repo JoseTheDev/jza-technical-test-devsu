@@ -11,6 +11,8 @@ public class AccountCreateRequestDTO {
 
     private String accountType;
 
+    private String customerName;
+
     private BigDecimal initialBalance;
 
 }

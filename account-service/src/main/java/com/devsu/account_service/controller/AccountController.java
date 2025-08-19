@@ -1,5 +1,7 @@
 package com.devsu.account_service.controller;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -47,13 +49,13 @@ public class AccountController {
 
 	@PostMapping
 	@Operation(summary = "Crear una cuenta")
-	public ResponseEntity<AccountManageResponseDTO> createAccount(
+	public CompletableFuture<ResponseEntity<AccountManageResponseDTO>> createAccount(
 			@RequestBody @Valid AccountCreateRequestDTO requestDTO) {
 
 		log.info("Creating account");
 
-		AccountManageResponseDTO account = accountCommand.createAccount(requestDTO);
-		return ResponseEntity.status(HttpStatus.CREATED).body(account);
+		return accountCommand.createAccount(requestDTO)
+				.thenApply(account -> ResponseEntity.status(HttpStatus.CREATED).body(account));
 	}
 
 	@PutMapping("/{accountNumber}")

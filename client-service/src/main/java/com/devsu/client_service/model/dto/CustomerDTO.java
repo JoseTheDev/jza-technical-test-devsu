@@ -9,8 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerDTO extends PersonDTO {
-
-    private Long customerId;
     
     private Boolean status;
 

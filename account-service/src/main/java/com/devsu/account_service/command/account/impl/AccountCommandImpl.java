@@ -1,5 +1,7 @@
 package com.devsu.account_service.command.account.impl;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.stereotype.Component;
 
 import com.devsu.account_service.command.account.AccountCommand;
@@ -34,22 +36,21 @@ public class AccountCommandImpl implements AccountCommand {
     }
 
     @Override
-    public AccountManageResponseDTO createAccount(AccountCreateRequestDTO accountDTO) {
-        AccountManageResponseDTO responseDTO = new AccountManageResponseDTO();
-
-        Account account = accountService.createAccount(mapper.toCreateEntity(accountDTO));
-
-        responseDTO.setAccountDTO(mapper.toDTO(account));
-        responseDTO.setMessage("CUENTA CREADA!");
-
-        return responseDTO;
+    public CompletableFuture<AccountManageResponseDTO> createAccount(AccountCreateRequestDTO accountDTO) {
+        return accountService.createAccount(mapper.toCreateEntity(accountDTO))
+                .thenApply(account -> {
+                    AccountManageResponseDTO responseDTO = new AccountManageResponseDTO();
+                    responseDTO.setAccountDTO(mapper.toDTO(account));
+                    responseDTO.setMessage("CUENTA CREADA!");
+                    return responseDTO;
+                });
     }
 
     @Override
     public AccountManageResponseDTO updateAccount(Long accountNumber, AccountUpdateRequestDTO accountDTO) {
         AccountManageResponseDTO responseDTO = new AccountManageResponseDTO();
 
-        Account account = accountService.createAccount(mapper.toUpdateEntity(accountDTO));
+        Account account = accountService.updateAccount(accountNumber, mapper.toUpdateEntity(accountDTO));
 
         responseDTO.setAccountDTO(mapper.toDTO(account));
         responseDTO.setMessage("CUENTA CREADA!");

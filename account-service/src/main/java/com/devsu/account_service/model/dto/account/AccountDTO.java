@@ -13,6 +13,10 @@ public class AccountDTO {
 
     private BigDecimal initialBalance;
 
+    private Long customerId;
+
+    private String customerName;
+
     private Boolean status;
 
 }

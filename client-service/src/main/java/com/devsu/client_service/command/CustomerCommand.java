@@ -9,6 +9,8 @@ public interface CustomerCommand {
 
     CustomerSearchResponseDTO searchCustomer(Long customerId);
 
+    CustomerSearchResponseDTO searchCustomerByName(String name);
+
     CustomerManageResponseDTO createCustomer(CustomerCreateRequestDTO customerDTO);
 
     CustomerManageResponseDTO updateCustomer(Long customerId, CustomerUpdateRequestDTO customerDTO);

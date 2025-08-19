@@ -31,6 +31,13 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
     }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Customer searchCustomerByName(String name) {
+        return customerRepository.findTopByName(name)
+                .orElseThrow(() -> new CustomerNotFoundException("Cliente no encontrado con nombre: " + name));
+    }
    
     @Override
     public Customer createCustomer(Customer customer) {

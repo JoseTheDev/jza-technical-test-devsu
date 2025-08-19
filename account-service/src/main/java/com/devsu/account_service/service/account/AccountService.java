@@ -1,5 +1,8 @@
 package com.devsu.account_service.service.account;
 
+import java.util.concurrent.CompletableFuture;
+
+import com.devsu.account_service.exception.AccountNotFoundException;
 import com.devsu.account_service.model.Account;
 
 import jakarta.validation.ValidationException;
@@ -22,7 +25,7 @@ public interface AccountService {
      * @return a {@code AccountManageResponseDTO} containing creation status and message
      * @throws ValidationException if provided account data is invalid
      */
-    Account createAccount(Account account);
+    CompletableFuture<Account> createAccount(Account account);
 
     /**
      * Updates an existing account.

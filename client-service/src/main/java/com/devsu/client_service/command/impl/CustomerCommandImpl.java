@@ -34,6 +34,18 @@ public class CustomerCommandImpl implements CustomerCommand {
     }
 
     @Override
+    public CustomerSearchResponseDTO searchCustomerByName(String name) {
+        CustomerSearchResponseDTO responseDTO = new CustomerSearchResponseDTO();
+
+        Customer customer = customerService.searchCustomerByName(name);
+
+        responseDTO.setCustomer(mapper.toDto(customer));
+        responseDTO.setMessage("CLIENTE ENCONTRADO!");
+
+        return responseDTO;
+    }
+
+    @Override
     public CustomerManageResponseDTO createCustomer(CustomerCreateRequestDTO customerDTO) {
         CustomerManageResponseDTO responseDTO = new CustomerManageResponseDTO();
 
