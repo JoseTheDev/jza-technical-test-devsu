@@ -1,14 +1,17 @@
 package com.devsu.client_service.service.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsu.client_service.exception.CustomerAlreadyCreatedException;
 import com.devsu.client_service.exception.CustomerNotFoundException;
 import com.devsu.client_service.mapper.CustomerMapper;
 import com.devsu.client_service.model.Customer;
 import com.devsu.client_service.repository.CustomerRepository;
 import com.devsu.client_service.service.CustomerService;
 
+import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -20,6 +23,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerMapper customerMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Override
     @Transactional(readOnly = true)
     public Customer searchCustomer(Long customerId) {
@@ -28,15 +33,31 @@ public class CustomerServiceImpl implements CustomerService {
     }
    
     @Override
-    @Transactional
     public Customer createCustomer(Customer customer) {
-        return customerRepository.findByIdentification(customer.getIdentification())
-                .orElseGet(() -> customerRepository.save(customer));
+        if (customer.getAge() < 18) {
+            throw new ValidationException("EL CLIENTE NO ES ADULTO");
+        }
+
+        customerRepository.findByIdentification(customer.getIdentification())
+                .ifPresent(existing -> {
+                    throw new CustomerAlreadyCreatedException(existing.getCustomerId());
+                });
+
+        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
+
+        Customer created = customerRepository.save(customer);       
+        Customer fromDB = customerRepository.findByIdentification(created.getIdentification())
+                .orElseThrow(() -> new CustomerNotFoundException((created.getCustomerId())));
+
+        return fromDB;
     }
 
     @Override
-    @Transactional
     public Customer updateCustomer(Long customerId, Customer customer) {
+        if (customerId != customer.getCustomerId()) {
+            throw new ValidationException("IDS DE CLIENTE NO CORRESPONDIENTES");
+        }
+        
         Customer existingCustomer = customerRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
 
@@ -46,7 +67,6 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Transactional
     public void deleteCustomer(Long customerId) {
         Customer customer = customerRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));

@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Tag(name = "Movimientos API", description = "Operaciones sobre movimientos")
+@Tag(name = "Movimientos", description = "Operaciones sobre movimientos")
 public class TransactionController {
 
     private final TransactionService transactionService;

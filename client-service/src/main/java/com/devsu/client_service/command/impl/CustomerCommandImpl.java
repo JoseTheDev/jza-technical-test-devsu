@@ -27,7 +27,7 @@ public class CustomerCommandImpl implements CustomerCommand {
 
         Customer customer = customerService.searchCustomer(customerId);
 
-        responseDTO.setCustomerDTO(mapper.toDto(customer));
+        responseDTO.setCustomer(mapper.toDto(customer));
         responseDTO.setMessage("CLIENTE ENCONTRADO!");
 
         return responseDTO;
@@ -39,7 +39,7 @@ public class CustomerCommandImpl implements CustomerCommand {
 
         Customer customer = customerService.createCustomer(mapper.toCreateEntity(customerDTO));
 
-        responseDTO.setCustomerDTO(mapper.toDto(customer));
+        responseDTO.setCustomer(mapper.toDto(customer));
         responseDTO.setMessage("CLIENTE CREADO!");
 
         return responseDTO;
@@ -51,7 +51,7 @@ public class CustomerCommandImpl implements CustomerCommand {
 
         Customer customer = customerService.updateCustomer(customerId, mapper.toUpdateEntity(customerDTO));
 
-        responseDTO.setCustomerDTO(mapper.toDto(customer));
+        responseDTO.setCustomer(mapper.toDto(customer));
         responseDTO.setMessage("CLIENTE ACTUALIZADO!");
 
         return responseDTO;

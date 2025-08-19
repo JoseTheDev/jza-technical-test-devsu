@@ -4,14 +4,14 @@ import lombok.Getter;
 
 @Getter
 public enum Gender {
-    MALE("M"),
-    FEMALE("F"),
-    OTHER("O"),
-    PREFER_NOT_TO_SAY("X");
+    M("MALE"),
+    F("FEMALE"),
+    O("OTHER"),
+    X("PREFER NOT TO SAY");
     
-    private final String code;
+    private final String description;
     
-    Gender(String code) {
-        this.code = code;
+    Gender(String description) {
+        this.description = description;
     }
 }

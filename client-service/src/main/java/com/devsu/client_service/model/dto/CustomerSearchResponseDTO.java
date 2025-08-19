@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CustomerSearchResponseDTO {
 
-    CustomerDTO customerDTO;
+    CustomerDTO customer;
 
     String message;
 

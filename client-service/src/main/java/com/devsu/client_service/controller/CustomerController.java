@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Tag(name = "Clientes API", description = "Operaciones sobre clientes")
+@Tag(name = "Clientes", description = "Operaciones sobre clientes")
 public class CustomerController {
 
 	private final CustomerCommand customerCommand;

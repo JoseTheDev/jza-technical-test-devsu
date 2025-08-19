@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-@Tag(name = "Cuentas API", description = "Operaciones sobre cuentas")
+@Tag(name = "Cuentas", description = "Operaciones sobre cuentas")
 public class AccountController {
 
     private final AccountService accountService;

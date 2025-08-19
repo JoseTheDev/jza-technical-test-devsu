@@ -1,11 +1,14 @@
 package com.devsu.client_service.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomerManageResponseDTO {
 
-    private CustomerDTO customerDTO;
+    private CustomerDTO customer;
 
     private String message;
 

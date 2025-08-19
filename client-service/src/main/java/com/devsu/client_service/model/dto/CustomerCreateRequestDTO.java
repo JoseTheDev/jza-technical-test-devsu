@@ -16,7 +16,7 @@ public class CustomerCreateRequestDTO {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @NotBlank(message = "DEBE SUMINISTRAR EL GENERO")
+    @NotNull(message = "DEBE SUMINISTRAR EL GENERO")
     private Gender gender;
 
     @NotNull(message = "DEBE SUMINISTRAR LA EDAD")
