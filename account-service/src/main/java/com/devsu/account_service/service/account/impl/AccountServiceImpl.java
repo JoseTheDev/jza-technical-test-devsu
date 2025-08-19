@@ -32,11 +32,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account createAccount(Account account) {
-        if (account.getInitialBalance().compareTo(BigDecimal.valueOf(1)) < 0) {
-            throw new ValidationException("EL BALANCE DEBE SER MAYOR A 0.99");
-        }
-        
+    public Account createAccount(Account account) {        
         accountRepository.findByAccountNumber(account.getAccountNumber())
                 .ifPresent(existing -> {
                     throw new AccountAlreadyCreatedException(existing.getAccountNumber());

@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devsu.account_service.command.transaction.TransactionCommand;
 import com.devsu.account_service.model.dto.transaction.TransactionCreateRequestDTO;
 import com.devsu.account_service.model.dto.transaction.TransactionManageResponseDTO;
 import com.devsu.account_service.model.dto.transaction.TransactionSearchResponseDTO;
 import com.devsu.account_service.model.dto.transaction.TransactionUpdateRequestDTO;
-import com.devsu.account_service.service.transaction.TransactionService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "Movimientos", description = "Operaciones sobre movimientos")
 public class TransactionController {
 
-    private final TransactionService transactionService;
+    private final TransactionCommand transactionCommand;
 
     @GetMapping("/{transactionId}")
 	@Operation(summary = "Obtener un movimiento por ID")
@@ -41,7 +41,7 @@ public class TransactionController {
 
 		log.info("Fetching transaction with ID: {}", transactionId);
 
-		TransactionSearchResponseDTO transaction = transactionService.searchTransaction(transactionId);
+		TransactionSearchResponseDTO transaction = transactionCommand.searchTransaction(transactionId);
 		return ResponseEntity.ok(transaction);
 	}
 
@@ -52,7 +52,7 @@ public class TransactionController {
 
 		log.info("Creating transaction");
 
-		TransactionManageResponseDTO transaction = transactionService.createTransaction(requestDTO);
+		TransactionManageResponseDTO transaction = transactionCommand.createTransaction(requestDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(transaction);
 	}
 
@@ -64,7 +64,7 @@ public class TransactionController {
 
 		log.info("Updating transaction with ID: {}", transactionId);
 
-		TransactionManageResponseDTO transaction = transactionService.updateTransaction(transactionId, requestDTO);
+		TransactionManageResponseDTO transaction = transactionCommand.updateTransaction(transactionId, requestDTO);
 		return ResponseEntity.ok(transaction);
 	}
 

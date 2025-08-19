@@ -24,6 +24,9 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "numero_cuenta")
+    private Long accountNumber;
+
     @Column(name = "fecha")
     private LocalDateTime date;
 
