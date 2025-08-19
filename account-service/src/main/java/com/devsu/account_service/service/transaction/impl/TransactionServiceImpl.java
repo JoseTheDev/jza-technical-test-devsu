@@ -61,8 +61,12 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction updateTransaction(Long transactionId, Transaction transaction) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateTransaction'");
+        Transaction existingTransaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new TransactionNotFoundException(transactionId));
+
+        transactionMapper.updateExisting(transaction, existingTransaction);
+
+        return transactionRepository.save(existingTransaction);
     }
 
 }

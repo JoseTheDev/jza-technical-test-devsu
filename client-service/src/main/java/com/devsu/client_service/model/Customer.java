@@ -16,9 +16,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class Customer extends Person {
 
-    @Column(name = "id_cliente")
-    private Long customerId;
-
     @Column(name = "contrasena")
     private String password;
 

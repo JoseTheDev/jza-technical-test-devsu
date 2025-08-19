@@ -14,6 +14,8 @@ public class TransactionDTO {
 
     private String transactionType;
 
+    private Long accountNumber;
+
     private BigDecimal amount;
 
     private BigDecimal balance;

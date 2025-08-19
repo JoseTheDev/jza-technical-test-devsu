@@ -28,7 +28,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     @Transactional(readOnly = true)
     public Customer searchCustomer(Long customerId) {
-        return customerRepository.findByCustomerId(customerId)
+        return customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
     }
    
@@ -40,21 +40,16 @@ public class CustomerServiceImpl implements CustomerService {
 
         customerRepository.findByIdentification(customer.getIdentification())
                 .ifPresent(existing -> {
-                    throw new CustomerAlreadyCreatedException(existing.getCustomerId());
+                    throw new CustomerAlreadyCreatedException(existing.getId());
                 });
 
-        customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-
-        Customer created = customerRepository.save(customer);       
-        Customer fromDB = customerRepository.findByIdentification(created.getIdentification())
-                .orElseThrow(() -> new CustomerNotFoundException((created.getCustomerId())));
-
-        return fromDB;
+        customer.setPassword(passwordEncoder.encode(customer.getPassword())); 
+        return customerRepository.save(customer);
     }
 
     @Override
     public Customer updateCustomer(Long customerId, Customer customer) {
-        Customer existingCustomer = customerRepository.findByCustomerId(customerId)
+        Customer existingCustomer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
 
         customerMapper.updateExisting(customer, existingCustomer);
@@ -64,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(Long customerId) {
-        Customer customer = customerRepository.findByCustomerId(customerId)
+        Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
         customerRepository.delete(customer);
     }

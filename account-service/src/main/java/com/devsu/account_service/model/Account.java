@@ -27,7 +27,10 @@ public class Account {
     @Column(name = "saldo_inicial")
     private BigDecimal initialBalance;
 
+    @Column(name = "id_cliente")
+    private Long customerId;
+
     @Column(name = "estado")
-    private Boolean status;
+    private Boolean status = true;
 
 }

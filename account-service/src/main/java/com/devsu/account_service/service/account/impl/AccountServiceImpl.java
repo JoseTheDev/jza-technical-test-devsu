@@ -1,7 +1,5 @@
 package com.devsu.account_service.service.account.impl;
 
-import java.math.BigDecimal;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +10,6 @@ import com.devsu.account_service.model.Account;
 import com.devsu.account_service.repository.account.AccountRepository;
 import com.devsu.account_service.service.account.AccountService;
 
-import jakarta.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 
 @Service

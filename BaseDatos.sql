@@ -6,31 +6,24 @@ USE clientes_db;
 
 -- TABLA PERSONAS
 CREATE TABLE IF NOT EXISTS personas (
+	id BIGINT NOT NULL AUTO_INCREMENT,
     identificacion VARCHAR(50) NOT NULL,
     nombre VARCHAR(100) NOT NULL,
     genero VARCHAR(1) NOT NULL,
     edad INT,
     direccion VARCHAR(150) NOT NULL,
     telefono VARCHAR(20) NOT NULL,
-    PRIMARY KEY (identificacion)
+    PRIMARY KEY (id)
 );
-
--- PARA BUSQUEDA POR NOMBRE
-CREATE INDEX idx_personas_nombre ON personas (nombre);
 
 -- TABLA CLIENTES
 CREATE TABLE IF NOT EXISTS clientes (
-    identificacion VARCHAR(50) NOT NULL,
-    id_cliente BIGINT NOT NULL AUTO_INCREMENT,
+    id VARCHAR(50) NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT TRUE,
-    PRIMARY KEY (identificacion),
-    UNIQUE (id_cliente),
-    CONSTRAINT fk_cliente_persona FOREIGN KEY (identificacion) REFERENCES personas (identificacion)
+    PRIMARY KEY (id),
+    CONSTRAINT fk_cliente_persona FOREIGN KEY (id) REFERENCES personas (id)
 );
-
--- PARA BUSQUEDA POR ID DE CLIENTE
-CREATE INDEX idx_clientes_id_cliente ON clientes (id_cliente);
 
 
 -- SERVICIOS DE CUENTAS
@@ -42,6 +35,7 @@ CREATE TABLE IF NOT EXISTS cuentas (
     tipo_cuenta VARCHAR(10) NOT NULL,
     saldo_inicial DECIMAL(15,2) NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT TRUE,
+	id_cliente BIGINT NOT NULL,
     PRIMARY KEY (numero_cuenta)
 );
 
@@ -50,7 +44,9 @@ CREATE TABLE IF NOT EXISTS movimientos (
     id BIGINT NOT NULL AUTO_INCREMENT,
 	fecha DATETIME NOT NULL,
     tipo_movimiento VARCHAR(100) NOT NULL,
+	numero_cuenta BIGINT NOT NULL,
 	valor DECIMAL(15,2) NOT NULL,
 	saldo DECIMAL(15,2) NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+	CONSTRAINT fk_cuenta_movimiento FOREIGN KEY (numero_cuenta) REFERENCES cuentas (numero_cuenta)
 );

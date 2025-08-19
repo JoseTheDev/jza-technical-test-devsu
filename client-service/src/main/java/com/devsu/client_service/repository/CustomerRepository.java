@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.devsu.client_service.model.Customer;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, String> {
-
-    Optional<Customer> findByCustomerId(Long customerId);
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Optional<Customer> findByIdentification(String identification);
 
