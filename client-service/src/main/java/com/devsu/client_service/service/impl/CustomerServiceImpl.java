@@ -54,10 +54,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(Long customerId, Customer customer) {
-        if (customerId != customer.getCustomerId()) {
-            throw new ValidationException("IDS DE CLIENTE NO CORRESPONDIENTES");
-        }
-        
         Customer existingCustomer = customerRepository.findByCustomerId(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
 

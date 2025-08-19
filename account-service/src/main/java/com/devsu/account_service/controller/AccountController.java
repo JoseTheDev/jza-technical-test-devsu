@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devsu.account_service.command.account.AccountCommand;
 import com.devsu.account_service.model.dto.account.AccountCreateRequestDTO;
 import com.devsu.account_service.model.dto.account.AccountManageResponseDTO;
 import com.devsu.account_service.model.dto.account.AccountSearchResponseDTO;
 import com.devsu.account_service.model.dto.account.AccountUpdateRequestDTO;
-import com.devsu.account_service.service.account.AccountService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 @Tag(name = "Cuentas", description = "Operaciones sobre cuentas")
 public class AccountController {
 
-    private final AccountService accountService;
+    private final AccountCommand accountCommand;
 
     @GetMapping("/{accountNumber}")
 	@Operation(summary = "Obtener una cuenta por numero")
@@ -41,7 +41,7 @@ public class AccountController {
 
 		log.info("Fetching account with number: {}", accountNumber);
 
-		AccountSearchResponseDTO account = accountService.searchAccount(accountNumber);
+		AccountSearchResponseDTO account = accountCommand.searchAccount(accountNumber);
 		return ResponseEntity.ok(account);
 	}
 
@@ -52,7 +52,7 @@ public class AccountController {
 
 		log.info("Creating account");
 
-		AccountManageResponseDTO account = accountService.createAccount(requestDTO);
+		AccountManageResponseDTO account = accountCommand.createAccount(requestDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(account);
 	}
 
@@ -64,7 +64,7 @@ public class AccountController {
 
 		log.info("Updating account with number: {}", accountNumber);
 
-		AccountManageResponseDTO account = accountService.updateAccount(accountNumber, requestDTO);
+		AccountManageResponseDTO account = accountCommand.updateAccount(accountNumber, requestDTO);
 		return ResponseEntity.ok(account);
 	}
 

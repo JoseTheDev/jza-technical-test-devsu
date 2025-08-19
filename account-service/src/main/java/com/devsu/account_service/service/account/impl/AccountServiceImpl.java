@@ -1,32 +1,58 @@
 package com.devsu.account_service.service.account.impl;
 
-import org.springframework.stereotype.Service;
+import java.math.BigDecimal;
 
-import com.devsu.account_service.model.dto.account.AccountCreateRequestDTO;
-import com.devsu.account_service.model.dto.account.AccountManageResponseDTO;
-import com.devsu.account_service.model.dto.account.AccountSearchResponseDTO;
-import com.devsu.account_service.model.dto.account.AccountUpdateRequestDTO;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.devsu.account_service.exception.AccountAlreadyCreatedException;
+import com.devsu.account_service.exception.AccountNotFoundException;
+import com.devsu.account_service.mapper.AccountMapper;
+import com.devsu.account_service.model.Account;
+import com.devsu.account_service.repository.account.AccountRepository;
 import com.devsu.account_service.service.account.AccountService;
 
+import jakarta.validation.ValidationException;
+import lombok.RequiredArgsConstructor;
+
 @Service
+@Transactional
+@RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
+    
+    private final AccountRepository accountRepository;
+
+    private final AccountMapper accountMapper;
 
     @Override
-    public AccountSearchResponseDTO searchAccount(Long accountNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'searchAccount'");
+    @Transactional(readOnly = true)
+    public Account searchAccount(Long accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new AccountNotFoundException(accountNumber));
     }
 
     @Override
-    public AccountManageResponseDTO createAccount(AccountCreateRequestDTO accountDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createAccount'");
+    public Account createAccount(Account account) {
+        if (account.getInitialBalance().compareTo(BigDecimal.valueOf(1)) < 0) {
+            throw new ValidationException("EL BALANCE DEBE SER MAYOR A 0.99");
+        }
+        
+        accountRepository.findByAccountNumber(account.getAccountNumber())
+                .ifPresent(existing -> {
+                    throw new AccountAlreadyCreatedException(existing.getAccountNumber());
+                });
+
+        return accountRepository.save(account);
     }
 
     @Override
-    public AccountManageResponseDTO updateAccount(Long accountNumber, AccountUpdateRequestDTO accountDTO) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateAccount'");
+    public Account updateAccount(Long accountNumber, Account account) {
+        Account existingAccount = accountRepository.findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new AccountNotFoundException(accountNumber));
+
+        accountMapper.updateExisting(account, existingAccount);
+
+        return accountRepository.save(existingAccount);
     }
 
 }

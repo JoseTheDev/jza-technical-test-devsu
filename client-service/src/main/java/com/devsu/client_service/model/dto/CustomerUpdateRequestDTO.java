@@ -1,15 +1,11 @@
 package com.devsu.client_service.model.dto;
 
 import com.devsu.client_service.enums.Gender;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
 public class CustomerUpdateRequestDTO {
-
-    @NotNull(message = "DEBE SUMINISTRAR EL ID DE CLIENTE")
-    private Long customerId;
 
     private String name;
 

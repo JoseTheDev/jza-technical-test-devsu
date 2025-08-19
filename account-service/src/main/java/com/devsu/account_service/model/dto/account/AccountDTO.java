@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
-public class AccountCreateRequestDTO {
+public class AccountDTO {
 
     private Long accountNumber;
 
     private String accountType;
 
     private BigDecimal initialBalance;
+
+    private Boolean status;
 
 }

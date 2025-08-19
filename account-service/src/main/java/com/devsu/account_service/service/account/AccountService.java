@@ -1,9 +1,6 @@
 package com.devsu.account_service.service.account;
 
-import com.devsu.account_service.model.dto.account.AccountCreateRequestDTO;
-import com.devsu.account_service.model.dto.account.AccountManageResponseDTO;
-import com.devsu.account_service.model.dto.account.AccountSearchResponseDTO;
-import com.devsu.account_service.model.dto.account.AccountUpdateRequestDTO;
+import com.devsu.account_service.model.Account;
 
 import jakarta.validation.ValidationException;
 
@@ -16,7 +13,7 @@ public interface AccountService {
      * @return a {@code AccountSearchResponseDTO} containing account related information
      * @throws AccountNotFoundException if account with given number does not exist
      */
-    AccountSearchResponseDTO searchAccount(Long accountNumber);
+    Account searchAccount(Long accountNumber);
 
     /**
      * Creates a new account.
@@ -25,7 +22,7 @@ public interface AccountService {
      * @return a {@code AccountManageResponseDTO} containing creation status and message
      * @throws ValidationException if provided account data is invalid
      */
-    AccountManageResponseDTO createAccount(AccountCreateRequestDTO accountDTO);
+    Account createAccount(Account account);
 
     /**
      * Updates an existing account.
@@ -36,6 +33,6 @@ public interface AccountService {
      * @throws ValidationException if provided account data is invalid
      * @throws AccountNotFoundException if account with given number does not exist
      */
-    AccountManageResponseDTO updateAccount(Long accountNumber, AccountUpdateRequestDTO accountDTO);
+    Account updateAccount(Long accountNumber, Account account);
 
 }
