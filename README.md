@@ -64,4 +64,4 @@ docker-compose down -v
 ## Notas
 
 * Los servicios estarán listos para recibir solicitudes después de levantar los contenedores.
-* 
+* Las pruebas de integración se ejecutan **después de levantar los contenedores** con Docker, ya que dependen de que los servicios estén en funcionamiento.
