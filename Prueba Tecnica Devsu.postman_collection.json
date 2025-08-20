@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "b3a20106-56b7-461d-82ec-a42a8c42ebc3",
+		"name": "Prueba Tecnica Devsu",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26361750"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Buscar cliente",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ1c2VyQG1lZHVjYS5lZHUucGEiLCJpYXQiOjE3NDE3NjE1MjksInJvbGVzIjpbIkRPQ0VOVEUiXSwiZXhwIjoxNzQxODQ3OTI5fQ.VMM_kBJAUbuLvWEoWVIF5anMXNND6YVx1C8ncoFfPEIgoOI5lx29q7qw5nMmC62A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURLClientes}}/api/v1/clientes/1",
+							"host": [
+								"{{baseURLClientes}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Juan Valdez\",\r\n  \"gender\": \"M\",\r\n  \"age\": 25,\r\n  \"identification\": \"8-888-888\",\r\n  \"address\": \"Ciudad de Panama, Panama\",\r\n  \"phoneNumber\": \"+50765656363\",\r\n  \"password\": \"devsupassword\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURLClientes}}/api/v1/clientes",
+							"host": [
+								"{{baseURLClientes}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"clientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Juanchin Valdez\",\r\n  \"gender\": null,\r\n  \"age\": null,\r\n  \"identification\": null,\r\n  \"address\": null,\r\n  \"phoneNumber\": null,\r\n  \"status\": null,\r\n  \"password\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURLClientes}}/api/v1/clientes/3",
+							"host": [
+								"{{baseURLClientes}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURLClientes}}/api/v1/clientes/3",
+							"host": [
+								"{{baseURLClientes}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"clientes",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuentas",
+			"item": [
+				{
+					"name": "Crear cuenta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountNumber\": 5000,\r\n  \"accountType\": \"CORIENTE\",\r\n  \"customerName\": \"Integrador Karate\",\r\n  \"initialBalance\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURLCuentas}}/api/v1/cuentas",
+							"host": [
+								"{{baseURLCuentas}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuentas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURLCuentas}}/api/v1/cuentas/4000",
+							"host": [
+								"{{baseURLCuentas}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"4000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountType\": \"CORRIENTE\",\r\n  \"status\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURLCuentas}}/api/v1/cuentas/4000",
+							"host": [
+								"{{baseURLCuentas}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cuentas",
+								"4000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimientos",
+			"item": [
+				{
+					"name": "Crear movimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountNumber\": 4000,\r\n  \"date\": \"2025-08-23T00:00:00\",\r\n  \"transactionType\": \"DEPOSITO 2000\",\r\n  \"amount\": 2000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURLCuentas}}/api/v1/movimientos",
+							"host": [
+								"{{baseURLCuentas}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movimientos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar movimiento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"transactionType\": \"DEPOSITO DE MARCOS 500\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURLCuentas}}/api/v1/movimientos/1",
+							"host": [
+								"{{baseURLCuentas}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movimientos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar movimiento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURLCuentas}}/api/v1/movimientos/1",
+							"host": [
+								"{{baseURLCuentas}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movimientos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reporte",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURLCuentas}}/api/v1/movimientos/reporte?customerId=1&fromDate=2025-08-20T00:00:00&toDate=2025-08-30T00:00:00",
+							"host": [
+								"{{baseURLCuentas}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"movimientos",
+								"reporte"
+							],
+							"query": [
+								{
+									"key": "customerId",
+									"value": "1"
+								},
+								{
+									"key": "fromDate",
+									"value": "2025-08-20T00:00:00"
+								},
+								{
+									"key": "toDate",
+									"value": "2025-08-30T00:00:00"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURLClientes",
+			"value": "http://localhost:8081"
+		},
+		{
+			"key": "baseURLCuentas",
+			"value": "http://localhost:8082"
+		}
+	]
+}
