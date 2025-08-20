@@ -45,6 +45,11 @@ Las rutas de los servicios son los siguientes:
 * client-service: http://localhost:8081/api/v1
 * account-service: http://localhost:8082/api/v1
 
+Para acceder a Swagger estas son las rutas:
+
+* client-service: http://localhost:8081/swagger-ui/index.html#/
+* account-service: http://localhost:8082/swagger-ui/index.html#/
+
 
 ## Detener y limpiar contenedores
 
