@@ -17,8 +17,14 @@ public class CustomerServiceAsync {
     private final CustomerServiceClient customerServiceClient;
 
     @Async
-    public CompletableFuture<CustomerSearchResponseDTO> getCustomerAsync(String name) {
+    public CompletableFuture<CustomerSearchResponseDTO> getCustomerByNameAsync(String name) {
         CustomerSearchResponseDTO customer = customerServiceClient.searchCustomerByName(name);
+        return CompletableFuture.completedFuture(customer);
+    }
+
+    @Async
+    public CompletableFuture<CustomerSearchResponseDTO> getCustomerByIdAsync(Long id) {
+        CustomerSearchResponseDTO customer = customerServiceClient.searchCustomerById(id);
         return CompletableFuture.completedFuture(customer);
     }
 

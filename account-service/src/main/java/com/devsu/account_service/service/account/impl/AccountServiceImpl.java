@@ -1,5 +1,6 @@
 package com.devsu.account_service.service.account.impl;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.stereotype.Service;
@@ -32,7 +33,20 @@ public class AccountServiceImpl implements AccountService {
     public Account searchAccount(Long accountNumber) {
         return accountRepository.findByAccountNumber(accountNumber)
                 .orElseThrow(() -> new AccountNotFoundException(accountNumber));
-        }
+    }
+
+    @Override
+    public CompletableFuture<List<Account>> searchCustomerAccounts(Long customerId) {
+       return customerServiceAsync.getCustomerByIdAsync(customerId)
+            .thenApply(customerDTO -> {
+                if (customerDTO == null) {
+                    throw new ValidationException("EL CLIENTE NO EXISTE");
+                }
+
+                return accountRepository.findAllByCustomerId(customerId);
+            });
+    }
+
     @Override
     public CompletableFuture<Account> createAccount(Account account) {        
         accountRepository.findByAccountNumber(account.getAccountNumber())
@@ -40,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
                     throw new AccountAlreadyCreatedException(existing.getAccountNumber());
                 });
 
-        return customerServiceAsync.getCustomerAsync(account.getCustomerName())
+        return customerServiceAsync.getCustomerByNameAsync(account.getCustomerName())
             .thenApply(customerDTO -> {
                 if (customerDTO == null) {
                     throw new ValidationException("EL CLIENTE NO EXISTE");

@@ -12,4 +12,7 @@ public interface CustomerServiceClient {
     @GetMapping("/by-name/{customerName}")
     CustomerSearchResponseDTO searchCustomerByName(@PathVariable String customerName);
 
+    @GetMapping("/{customerId}")
+    CustomerSearchResponseDTO searchCustomerById(@PathVariable Long customerId);
+
 }

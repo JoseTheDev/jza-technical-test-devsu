@@ -1,5 +1,6 @@
 package com.devsu.account_service.service.account;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import com.devsu.account_service.exception.AccountNotFoundException;
@@ -17,6 +18,8 @@ public interface AccountService {
      * @throws AccountNotFoundException if account with given number does not exist
      */
     Account searchAccount(Long accountNumber);
+    
+    CompletableFuture<List<Account>> searchCustomerAccounts(Long customerId);
 
     /**
      * Creates a new account.

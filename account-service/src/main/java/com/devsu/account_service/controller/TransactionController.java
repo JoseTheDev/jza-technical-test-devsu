@@ -1,5 +1,9 @@
 package com.devsu.account_service.controller;
 
+import java.time.LocalDateTime;
+import java.util.concurrent.CompletableFuture;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsu.account_service.command.transaction.TransactionCommand;
@@ -43,6 +48,19 @@ public class TransactionController {
 
 		TransactionSearchResponseDTO transaction = transactionCommand.searchTransaction(transactionId);
 		return ResponseEntity.ok(transaction);
+	}
+
+	@GetMapping("/reporte")
+	@Operation(summary = "Obtener un reporte de los movimientos de un cliente")
+	public CompletableFuture<ResponseEntity<TransactionSearchResponseDTO>> getAccountReport(
+			@RequestParam @NotNull(message = "ID DE CLIENTE REQUERIDO") Long customerId,
+			@RequestParam @NotNull(message = "FECHA DE INICIO REQUERIDA") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime fromDate,
+			@RequestParam @NotNull(message = "FECHA DE FIN REQUERIDA") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime toDate) {
+
+		log.info("Fetching transactions report of client with ID: {}", customerId);
+
+		return transactionCommand.getAccountReport(customerId, fromDate, toDate)
+				.thenApply(report -> ResponseEntity.status(HttpStatus.OK).body(report));
 	}
 
 	@PostMapping

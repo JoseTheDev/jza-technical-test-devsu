@@ -1,5 +1,9 @@
 package com.devsu.account_service.service.transaction;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
 import com.devsu.account_service.exception.TransactionNotFoundException;
 import com.devsu.account_service.model.Transaction;
 
@@ -15,6 +19,9 @@ public interface TransactionService {
      * @throws TransactionNotFoundException if transaction with given ID does not exist
      */
     Transaction searchTransaction(Long transactionId);
+
+    CompletableFuture<List<Transaction>> searchAccountsTransactions(List<Long> accountsNumber, LocalDateTime fromDate,
+            LocalDateTime toDate);
 
     /**
      * Creates a new transaction.

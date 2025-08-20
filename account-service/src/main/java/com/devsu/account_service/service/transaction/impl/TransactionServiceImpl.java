@@ -1,6 +1,9 @@
 package com.devsu.account_service.service.transaction.impl;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,14 +40,21 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    public CompletableFuture<List<Transaction>> searchAccountsTransactions(List<Long> accountsNumber,
+            LocalDateTime fromDate, LocalDateTime toDate) {
+        return CompletableFuture.supplyAsync(() -> transactionRepository.findByAccountNumberInAndDateBetween(
+                accountsNumber,
+                fromDate,
+                toDate));
+    }
+
+    @Override
     public Transaction createTransaction(Transaction transaction) {
         if (transaction.getAmount().compareTo(BigDecimal.ZERO) == 0) {
             throw new ValidationException("EL MONTO DEBE TENER ALGUN VALOR, POSITIVO O NEGATIVO");
         }
 
         BigDecimal previousBalance = getPreviousBalance(transaction.getAccountNumber());
-
-        log.warn("ULTIMO BALANCE: " + previousBalance);
 
         BigDecimal amount = transaction.getAmount();
 
