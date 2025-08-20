@@ -25,6 +25,15 @@ CREATE TABLE IF NOT EXISTS clientes (
     CONSTRAINT fk_cliente_persona FOREIGN KEY (id) REFERENCES personas (id)
 );
 
+-- INSERT PARA PRUEBA DE INTEGRACION
+INSERT INTO personas (identificacion, nombre, genero, edad, direccion, telefono)
+VALUES ('8-000-000', 'Integrador Karate', 'M', 18, 'Ciudad Karate, Panama', '6565-6767');
+
+SET @persona_id = LAST_INSERT_ID();
+
+INSERT INTO clientes (id, contrasena, estado)
+VALUES (@persona_id, 'devsupassword', TRUE);
+
 
 -- SERVICIOS DE CUENTAS
 USE cuentas_db;
@@ -51,3 +60,11 @@ CREATE TABLE IF NOT EXISTS movimientos (
     PRIMARY KEY (id),
 	CONSTRAINT fk_cuenta_movimiento FOREIGN KEY (numero_cuenta) REFERENCES cuentas (numero_cuenta)
 );
+
+-- INSERTS PARA PRUEBAS DE INTEGRACION
+
+INSERT INTO cuentas(numero_cuenta, tipo_cuenta, saldo_inicial, id_cliente, nombre_cliente)
+VALUES (4000, 'AHORROS', 1000, 1, 'Integrador Karate');
+
+INSERT INTO movimientos(fecha, tipo_movimiento, numero_cuenta, saldo, valor)
+VALUES ('2025-08-22T00:00:00', 'DEPOSITO 2000', 4000, 3000, 2000);
