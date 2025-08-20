@@ -1,5 +1,7 @@
 package com.devsu.account_service.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
@@ -13,6 +15,8 @@ import com.devsu.account_service.model.dto.transaction.TransactionUpdateRequestD
 public interface TransactionMapper {
 
     TransactionDTO toDTO(Transaction account);
+
+    List<TransactionDTO> toDTOs(List<Transaction> transactions);
 
     Transaction toCreateEntity(TransactionCreateRequestDTO requestDTO);
 
