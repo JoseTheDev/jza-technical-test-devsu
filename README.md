@@ -14,7 +14,7 @@ Este proyecto contiene los microservicios `account-service` y `client-service`. 
 
 ## Construcción de los servicios
 
-Antes de levantar los contenedores, compila los servicios:
+Antes de levantar los contenedores, compilar los servicios:
 
 ```bash
 # Construir account-service
@@ -38,6 +38,14 @@ docker-compose up --build -d
 
 * -d ejecuta los contenedores en modo “detached” (en segundo plano).
 
+## Rutas disponibles
+
+Las rutas de los servicios son los siguientes:
+
+* client-service: http://localhost:8081/api/v1
+* account-service: http://localhost:8082/api/v1
+
+
 ## Detener y limpiar contenedores
 
 Para detener los servicios y eliminar volúmenes asociados:
@@ -45,3 +53,10 @@ Para detener los servicios y eliminar volúmenes asociados:
 ```bash
 docker-compose down -v
 ```
+
+---
+
+## Notas
+
+* Los servicios estarán listos para recibir solicitudes después de levantar los contenedores.
+* 
