@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS personas (
 
 -- TABLA CLIENTES
 CREATE TABLE IF NOT EXISTS clientes (
-    id VARCHAR(50) NOT NULL,
+    id BIGINT NOT NULL,
     contrasena VARCHAR(255) NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT TRUE,
     PRIMARY KEY (id),
@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS cuentas (
     saldo_inicial DECIMAL(15,2) NOT NULL,
     estado BOOLEAN NOT NULL DEFAULT TRUE,
 	id_cliente BIGINT NOT NULL,
+	nombre_cliente VARCHAR(100) NOT NULL,
     PRIMARY KEY (numero_cuenta)
 );
 

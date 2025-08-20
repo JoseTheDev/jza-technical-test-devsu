@@ -8,12 +8,12 @@ import lombok.Data;
 @Data
 public class TransactionCreateRequestDTO {
 
+    private Long accountNumber;
+
     private LocalDateTime date;
 
     private String transactionType;
 
     private BigDecimal amount;
-
-    private BigDecimal balance;
 
 }

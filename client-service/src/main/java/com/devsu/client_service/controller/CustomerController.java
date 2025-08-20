@@ -47,7 +47,7 @@ public class CustomerController {
 		return ResponseEntity.ok(customer);
 	}
 	
-	@GetMapping("/{customerName}")
+	@GetMapping("by-name/{customerName}")
 	@Operation(summary = "Obtener un cliente por nombre")
 	public ResponseEntity<CustomerSearchResponseDTO> searchCustomerByName(
 			@PathVariable @NotNull(message = "NOMBRE DEL CLIENTE REQUERIDO") String customerName) {
