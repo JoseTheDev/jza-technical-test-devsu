@@ -50,7 +50,7 @@ public class TransactionCommandImpl implements TransactionCommand {
             TransactionUpdateRequestDTO transactionDTO) {
         TransactionManageResponseDTO responseDTO = new TransactionManageResponseDTO();
 
-        Transaction transaction = transactionService.createTransaction(mapper.toUpdateEntity(transactionDTO));
+        Transaction transaction = transactionService.updateTransaction(transactionId, mapper.toUpdateEntity(transactionDTO));
 
         responseDTO.setTransaction(mapper.toDTO(transaction));
         responseDTO.setMessage("TRANSACCION ACTUALIZADA!");
